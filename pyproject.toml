@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vpt"
+version = "0.1.0"
+description = "Verifier Perturbation Testing: trace-independent detection of reward hacking in RL-trained coding agents"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+authors = [{name = "Manav Agarwal", email = "manav@hanaml.com"}]
+requires-python = ">=3.9"
+dependencies = ["numpy>=1.23", "pyyaml>=6.0"]
+
+[project.optional-dependencies]
+paper = ["matplotlib>=3.7"]
+dev = ["pytest>=7"]
+
+[project.scripts]
+vpt-demo = "vpt.demo:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
