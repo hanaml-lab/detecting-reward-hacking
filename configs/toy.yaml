@@ -1,0 +1,6 @@
+# CPU toy run (< 1 minute)
+seed: 0
+honest_per_task: 60
+families: [surface, isolation, spec]
+K: 8
+alpha: 0.05

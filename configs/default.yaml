@@ -1,0 +1,15 @@
+# Settings used in the paper (Appendix A). Executors for real sandboxes are deployment-specific.
+families: [surface, isolation, spec]
+K: 8
+alpha: 0.01
+calibration:
+  fit_size: 2000
+  cal_size: 2000
+  refresh_every_steps: 50
+spec:
+  generator: Qwen3-32B
+  temperature: 0.7
+  retain_threshold: 0.8
+  n_reference_solutions: 4
+sandbox:
+  timeout_s: 60
