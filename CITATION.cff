@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the accompanying report."
+title: "Verifier Perturbation Testing: Trace-Independent Detection of Reward Hacking in RL-Trained Coding Agents"
+authors:
+  - family-names: Agarwal
+    given-names: Manav
+    affiliation: hanaML
+version: 0.1.0
+date-released: 2026-10-07
+license: Apache-2.0
+repository-code: "https://github.com/hanaml-lab/detecting-reward-hacking"
+preferred-citation:
+  type: report
+  title: "Verifier Perturbation Testing: Trace-Independent Detection of Reward Hacking in RL-Trained Coding Agents"
+  authors:
+    - family-names: Agarwal
+      given-names: Manav
+  institution:
+    name: hanaML
+  year: 2026
