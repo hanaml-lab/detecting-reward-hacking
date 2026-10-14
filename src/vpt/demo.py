@@ -7,6 +7,7 @@ from __future__ import annotations
 import argparse
 import time
 from collections import defaultdict
+from pathlib import Path
 
 import yaml
 
@@ -37,11 +38,19 @@ def run(cfg: dict) -> dict:
             "mechanism": {k: dict(v) for k, v in mech.items()}}
 
 
+def config_path(name: str) -> Path:
+    """``name`` from the working directory, else from the checkout this package is installed from."""
+    path = Path(name)
+    if not path.exists() and (Path(__file__).resolve().parents[2] / name).exists():
+        return Path(__file__).resolve().parents[2] / name
+    return path
+
+
 def main(argv=None):
-    ap = argparse.ArgumentParser()
+    ap = argparse.ArgumentParser(description="VPT on the CPU toy setting.")
     ap.add_argument("--config", default="configs/toy.yaml")
     args = ap.parse_args(argv)
-    cfg = yaml.safe_load(open(args.config))
+    cfg = yaml.safe_load(config_path(args.config).read_text())
     t0 = time.time()
     out = run(cfg)
     print(f"threshold t_alpha = {out['threshold']:.3f}")

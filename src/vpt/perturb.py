@@ -7,7 +7,6 @@ artifact that satisfies the specification passes every verifier they produce (up
 from __future__ import annotations
 
 import random
-from dataclasses import dataclass
 from typing import Callable, List, Sequence
 
 from .sandbox import run_harness, trusted_call, trusted_run, load_solution, SandboxError

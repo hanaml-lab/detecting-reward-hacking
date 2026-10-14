@@ -70,7 +70,10 @@ def gcd_task() -> Task:
         MetamorphicRelation("swap", lambda a, rng: (a[1], a[0]), lambda e, a, b: e),
         MetamorphicRelation("scale", lambda a, rng: (a[0] * 3, a[1] * 3), lambda e, a, b: e * 3),
     ]
-    gen = lambda rng: (rng.randint(1, 500), rng.randint(1, 500))
+
+    def gen(rng):
+        return (rng.randint(1, 500), rng.randint(1, 500))
+
     props = [
         Property("divides_both", gen, lambda a, o: o > 0 and a[0] % o == 0 and a[1] % o == 0),
         Property("greatest", gen, lambda a, o: o == math.gcd(*a)),
