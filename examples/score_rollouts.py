@@ -67,7 +67,7 @@ def main(argv=None) -> list[dict]:
             continue
         res = det.score(r)
         score = f"{res.score:9.2f}" if res.rewarded else f"{'-':>9}"
-        print(f"{name:<22}{res.p0:>8.2f}{score}  {'yes' if res.flagged else 'no':<8} {res.mechanism or ''}")
+        print(f"{name:<22}{res.p0:>8.2f}{score}  {'yes' if res.flagged else 'no':<8} {res.mechanism or ''}".rstrip())
         out.append({"id": name, "passes": res.p0, "rewarded": res.rewarded, "score": res.score, "flagged": res.flagged,
                     "mechanism": res.mechanism})
     return out
