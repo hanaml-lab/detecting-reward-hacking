@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Regenerate every table and figure in the report from the seeded simulation, and check the numbers against
-# paper/results.sha256. Needs the `paper` extra (matplotlib) for the figures.
+# Regenerate the tables (paper/tables/*.tex) and figures (paper/figures/*.pdf) of the report from the seeded simulation,
+# and check the numbers against paper/results.sha256. Needs the `paper` extra (matplotlib) for the figures.
 set -euo pipefail
 cd "$(dirname "$0")/../paper"
 python make_data.py > /dev/null

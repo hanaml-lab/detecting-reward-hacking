@@ -97,7 +97,7 @@ Results from GRPO training of Qwen3-8B for 600 steps:
 | CoT-monitor penalty | 42.3% | 30.3% |
 | VPT penalty | 5.9% | 50.6% |
 
-`bash scripts/reproduce_paper.sh` regenerates every table and figure. On every push, CI reruns `paper/make_data.py` and checks its tables and results against `paper/results.sha256` (`python paper/check_results.py`), so the report's numbers are exactly what the script emits.
+`bash scripts/reproduce_paper.sh` regenerates the tables and figures that the report's seeded simulation produces. On every push, CI reruns `paper/make_data.py` and checks the tables and results it writes against `paper/results.sha256` (`python paper/check_results.py`).
 
 ## Layout
 
