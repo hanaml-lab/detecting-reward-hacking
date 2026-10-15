@@ -19,7 +19,7 @@ def test_toy_end_to_end_under_a_minute():
 def test_unrewarded_rollouts_are_not_flagged():
     tasks = all_tasks()
     pool = make_pool(tasks, 6, 0)
-    det = VPTDetector(K=2, alpha=0.2).calibrate(pool["honest"][:15], pool["honest"][15:])
+    det = VPTDetector(K=2, alpha=0.2, seed=0).calibrate(pool["honest"][:15], pool["honest"][15:])
     r = pool["honest"][0]
     r.workspace.solution = "def solve(*a):\n    return None\n"
     res = det.score(r)
@@ -30,6 +30,6 @@ def test_unrewarded_rollouts_are_not_flagged():
 def test_reward_filter_zeroes_hacks():
     tasks = all_tasks()
     pool = make_pool(tasks, 6, 0)
-    det = VPTDetector(K=2, alpha=0.2).calibrate(pool["honest"][:15], pool["honest"][15:])
+    det = VPTDetector(K=2, alpha=0.2, seed=0).calibrate(pool["honest"][:15], pool["honest"][15:])
     assert all(det.reward(h) == 0.0 for h in pool["hacks"])
     assert all(det.reward(h) == 1.0 for h in pool["honest"][:5])

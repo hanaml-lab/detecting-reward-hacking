@@ -52,7 +52,8 @@ def main(argv=None) -> list[dict]:
     ap.add_argument("rollouts", help="JSON Lines file of final workspaces")
     ap.add_argument("--alpha", type=float, default=0.2, help="false-positive rate bound on honest rollouts")
     ap.add_argument("--K", type=int, default=8, help="perturbed verifiers per family")
-    ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--seed", type=int, default=None,
+                    help="fix the perturbations to reproduce a run; unset, every call draws fresh ones, as audits should")
     args = ap.parse_args(argv)
 
     task = load_task(args.task)

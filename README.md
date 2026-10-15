@@ -2,7 +2,7 @@
 
 [![ci](https://github.com/hanaml-lab/detecting-reward-hacking/actions/workflows/ci.yml/badge.svg)](https://github.com/hanaml-lab/detecting-reward-hacking/actions/workflows/ci.yml)
 
-Reference implementation of *Verifier Perturbation Testing: Trace-Independent Detection of Reward Hacking in RL-Trained Coding Agents* (Agarwal, hanaML technical report, 2026).
+Reference implementation of *Verifier Perturbation Testing: Trace-Independent Detection of Reward Hacking in RL-Trained Coding Agents* (Agarwal, hanaML preprint, 2026).
 
 VPT detects reward hacking without reading the agent's chain of thought, actions, activations or gradients. It rests on one invariance principle: an artifact that genuinely satisfies a specification passes every specification-preserving perturbation of its verifier, and an artifact that satisfies only the verifier does not. For each verifier-passing rollout, VPT runs the final artifact against $K$ perturbed verifiers from three families:
 
@@ -52,7 +52,7 @@ No honest rollout is flagged and every exploit category is caught on all five ta
 `examples/score_rollouts.py` takes a task file that defines `TASK` (a `vpt.Task`: the specification, the visible tests, metamorphic relations, specification-derived properties and reference solutions) and a JSON Lines file of final workspaces. Rollouts marked `"honest": true` calibrate the detector; the rest are scored.
 
 ```bash
-python examples/score_rollouts.py examples/data/median_task.py examples/data/median_rollouts.jsonl
+python examples/score_rollouts.py examples/data/median_task.py examples/data/median_rollouts.jsonl --seed 0
 ```
 
 ```
@@ -74,6 +74,8 @@ det = VPTDetector(K=8, alpha=0.01).calibrate(honest_fit, honest_cal)
 res = det.score(rollout)          # res.flagged, res.score, res.mechanism, res.gaps
 reward = det.reward(rollout)      # r' = r * 1[S <= t_alpha], the RL reward filter
 ```
+
+Leave `seed` unset in training and audits. The detector then draws its perturbations with fresh randomness from the operating system on every call. With a seed, every rollout is scored against the same perturbations, and the report's adaptive-attack section shows that a policy trained against them learns them within a few hundred steps: VPT's recall at 1% FPR on a penalty attacker's hacks falls from 78.1% to 45.5% with these public perturbations, and holds at 69.0% with private ones, which also take their properties from a generator the attacker never sees. Fix the seed only to reproduce a run, as the toy does and the example above does with `--seed 0`.
 
 For real environments, implement the execution layer in `src/vpt/sandbox.py` on a container runner and supply `Task.properties` from a specification-conditioned test generator. The toy sandbox uses `exec`, so it must never run untrusted code.
 
